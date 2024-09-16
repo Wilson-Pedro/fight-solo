@@ -8,28 +8,28 @@ import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
-public class Player implements ActionListener {
+public class Enemy implements ActionListener {
 
 	private Image image;
-	private int height, width;
+	private int width, height;
 	private int x, y;
 	private int dx;
 	private Timer timer;
 	
-	public Player() {
-		this.x = 100;
-		this.y = 305;
+	public Enemy() {
+		this.x = 1000;
+		this.y = 265;
 		
 		this.timer = new Timer(5000, this);
 		this.timer.start();
 	}
-
+	
 	public void load() {
-		ImageIcon imageIcon = new ImageIcon("res\\Player01.png");
+		ImageIcon imageIcon = new ImageIcon("res\\Enemy.png");
 		this.image = imageIcon.getImage();
 		
-		height = image.getHeight(null);
-		width = image.getWidth(null);
+		this.width = image.getWidth(null);
+		this.height = image.getHeight(null);
 	}
 	
 	public void update() {
@@ -39,25 +39,29 @@ public class Player implements ActionListener {
 	public void KeyPressed(KeyEvent key) {
 		int code = key.getKeyCode();
 		
-		if(code == KeyEvent.VK_D) {
-			dx = 3;
-		}
-		
-		if(code == KeyEvent.VK_A) {
+		if(code == KeyEvent.VK_LEFT) {
 			dx = -3;
 		}
+		
+//		if(code == KeyEvent.VK_LEFT) {
+//			dx = -3;
+//		}
 	}
 	
-	public void KeyRelease(KeyEvent key) {
-		int code = key.getKeyCode();
+	public void keyRelease(KeyEvent tecla) {
+		int codigo = tecla.getKeyCode();
 		
-		if(code == KeyEvent.VK_D) {
+		if(codigo == KeyEvent.VK_LEFT) {
 			dx = 0;
 		}
 		
-		if(code == KeyEvent.VK_A) {
-			dx = 0;
-		}
+//		if(codigo == KeyEvent.VK_RIGHT) {
+//			dx = 0;
+//		}
+	}
+
+	public Image getImage() {
+		return image;
 	}
 
 	public int getX() {
@@ -66,10 +70,6 @@ public class Player implements ActionListener {
 
 	public int getY() {
 		return y;
-	}
-
-	public Image getImage() {
-		return image;
 	}
 
 	@Override

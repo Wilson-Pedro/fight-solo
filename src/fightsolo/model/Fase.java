@@ -17,6 +17,7 @@ public class Fase extends JPanel implements ActionListener {
 
 	private Image background;
 	private Player player;
+	private Enemy enemy;
 	private Timer timer;
 	
 	public Fase() {
@@ -27,12 +28,17 @@ public class Fase extends JPanel implements ActionListener {
 		this.background = imageIcon.getImage();
 		
 		this.player = new Player();
-		player.load();
+		this.player.load();
 		
-		addKeyListener(new TecladoAdapter());
+		this.enemy = new Enemy();
+		this.enemy.load();
+		
+		addKeyListener(new TecladoPlayerAdapter());
+		addKeyListener(new TecladoEnemyAdapter());
 		
 		this.timer = new Timer(5, this);
 		this.timer.start();
+		
 	}
 	
 	public void paint(Graphics graphics) {
@@ -42,16 +48,19 @@ public class Fase extends JPanel implements ActionListener {
 		
 		graphics2D.drawImage(player.getImage(), player.getX(), player.getY(), this);
 		
+		graphics2D.drawImage(enemy.getImage(), enemy.getX(), enemy.getY(), this);
+		
 		graphics.dispose();
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		player.update();
+		enemy.update();
 		repaint();
 	}
 	
-	private class TecladoAdapter extends KeyAdapter {
+	private class TecladoPlayerAdapter extends KeyAdapter {
 		            
 		public void keyPressed(KeyEvent key) {
 			player.KeyPressed(key);
@@ -59,6 +68,17 @@ public class Fase extends JPanel implements ActionListener {
 		
 		public void keyReleased(KeyEvent key) {
 			player.KeyRelease(key);
+		}
+	}
+	
+	private class TecladoEnemyAdapter extends KeyAdapter {
+		
+		public void keyPressed(KeyEvent key) {
+			enemy.KeyPressed(key);
+		}
+		
+		public void keyReleased(KeyEvent key) {
+			enemy.KeyPressed(key);
 		}
 	}
 }
