@@ -11,7 +11,7 @@ import javax.swing.Timer;
 public class Enemy implements ActionListener {
 
 	private Image image;
-	private int width, height;
+	private int height, width;
 	private int x, y;
 	private int dx;
 	private Timer timer;
@@ -43,9 +43,9 @@ public class Enemy implements ActionListener {
 			dx = -3;
 		}
 		
-//		if(code == KeyEvent.VK_LEFT) {
-//			dx = -3;
-//		}
+		if(code == KeyEvent.VK_RIGHT) {
+			dx = 3;
+		}
 	}
 	
 	public void keyRelease(KeyEvent tecla) {
@@ -55,9 +55,9 @@ public class Enemy implements ActionListener {
 			dx = 0;
 		}
 		
-//		if(codigo == KeyEvent.VK_RIGHT) {
-//			dx = 0;
-//		}
+		if(codigo == KeyEvent.VK_RIGHT) {
+			dx = 0;
+		}
 	}
 
 	public Image getImage() {

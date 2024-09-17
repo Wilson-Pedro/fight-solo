@@ -28,8 +28,8 @@ public class Player implements ActionListener {
 		ImageIcon imageIcon = new ImageIcon("res\\Player01.png");
 		this.image = imageIcon.getImage();
 		
-		height = image.getHeight(null);
-		width = image.getWidth(null);
+		this.height = image.getHeight(null);
+		this.width = image.getWidth(null);
 	}
 	
 	public void update() {

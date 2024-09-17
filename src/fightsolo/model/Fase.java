@@ -78,7 +78,7 @@ public class Fase extends JPanel implements ActionListener {
 		}
 		
 		public void keyReleased(KeyEvent key) {
-			enemy.KeyPressed(key);
+			enemy.keyRelease(key);
 		}
 	}
 }
