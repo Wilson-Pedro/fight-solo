@@ -33,7 +33,9 @@ public class Player implements ActionListener {
 	}
 	
 	public void update() {
-		this.x += dx;
+		if((x + dx) > 0 && (x + dx) <= 1120) {
+			this.x += dx;
+		}
 	}
 	
 	public void KeyPressed(KeyEvent key) {
