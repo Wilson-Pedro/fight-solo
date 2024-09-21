@@ -36,7 +36,7 @@ public class Fase extends JPanel implements ActionListener {
 		addKeyListener(new TecladoPlayerAdapter());
 		addKeyListener(new TecladoEnemyAdapter());
 		
-		this.timer = new Timer(5, this);
+		this.timer = new Timer(0, this);
 		this.timer.start();
 		
 	}
@@ -57,6 +57,21 @@ public class Fase extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		player.update();
 		enemy.update();
+		if(player.isAttack()) {
+			timer.setDelay(1);
+		}
+		
+		if(!player.isAttack()) {
+			timer.setDelay(5);
+		}
+		
+		if(enemy.isAttack()) {
+			timer.setDelay(1);
+		}
+		
+		if(!enemy.isAttack()) {
+			timer.setDelay(5);
+		}
 		repaint();
 	}
 	

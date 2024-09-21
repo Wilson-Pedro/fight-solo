@@ -15,13 +15,26 @@ public class Enemy implements ActionListener {
 	private int x, y;
 	private int dx;
 	private Timer timer;
+	private boolean isAttack;
 	
 	public Enemy() {
 		this.x = 1000;
-		this.y = 265;
+		this.y = 280;
 		
-		this.timer = new Timer(5000, this);
+		this.timer = new Timer(700, this);
 		this.timer.start();
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(isAttack) {
+			attack();
+			isAttack = false;
+		}
+		
+		if(!isAttack) {
+			load();
+		}
 	}
 	
 	public void load() {
@@ -38,8 +51,18 @@ public class Enemy implements ActionListener {
 		}
 	}
 	
+	public void attack() {
+		this.isAttack = true;
+		ImageIcon imageAttack = new ImageIcon("res\\Enemy-Attack.png");
+		this.image = imageAttack.getImage();
+	}
+	
 	public void KeyPressed(KeyEvent key) {
 		int code = key.getKeyCode();
+		
+		if(code == KeyEvent.VK_ENTER) {
+			attack();
+		}
 		
 		if(code == KeyEvent.VK_LEFT) {
 			dx = -3;
@@ -74,9 +97,7 @@ public class Enemy implements ActionListener {
 		return y;
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+	public boolean isAttack() {
+		return isAttack;
 	}
 }

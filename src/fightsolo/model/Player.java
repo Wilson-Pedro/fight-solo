@@ -15,13 +15,26 @@ public class Player implements ActionListener {
 	private int x, y;
 	private int dx;
 	private Timer timer;
+	private boolean isAttack;
 	
 	public Player() {
 		this.x = 100;
 		this.y = 305;
 		
-		this.timer = new Timer(5000, this);
+		this.timer = new Timer(700, this);
 		this.timer.start();
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(isAttack == true) {
+			attack();
+			isAttack = false;
+		}
+		
+		if(!isAttack) {
+			load();
+		}
 	}
 
 	public void load() {
@@ -38,8 +51,18 @@ public class Player implements ActionListener {
 		}
 	}
 	
+	public void attack() {
+		this.isAttack = true;
+		ImageIcon imageAttack = new ImageIcon("res\\Player01-Attack.png");
+		this.image = imageAttack.getImage();
+	}
+	
 	public void KeyPressed(KeyEvent key) {
 		int code = key.getKeyCode();
+		
+		if(code == KeyEvent.VK_SPACE) {
+			attack();
+		}
 		
 		if(code == KeyEvent.VK_D) {
 			dx = 3;
@@ -74,9 +97,7 @@ public class Player implements ActionListener {
 		return image;
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+	public boolean isAttack() {
+		return isAttack;
 	}
 }
