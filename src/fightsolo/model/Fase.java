@@ -16,8 +16,8 @@ public class Fase extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	private Image background;
-	private Player player;
-	private Enemy enemy;
+	private Player01 player01;
+	private Player02 player02;
 	private Timer timer;
 	
 	public Fase() {
@@ -27,11 +27,11 @@ public class Fase extends JPanel implements ActionListener {
 		ImageIcon imageIcon = new ImageIcon("res\\Florest02.png");
 		this.background = imageIcon.getImage();
 		
-		this.player = new Player();
-		this.player.load();
+		this.player01 = new Player01();
+		this.player01.load();
 		
-		this.enemy = new Enemy();
-		this.enemy.load();
+		this.player02 = new Player02();
+		this.player02.load();
 		
 		addKeyListener(new TecladoPlayerAdapter());
 		addKeyListener(new TecladoEnemyAdapter());
@@ -46,30 +46,30 @@ public class Fase extends JPanel implements ActionListener {
 		
 		graphics2D.drawImage(background, 0, 0, null);
 		
-		graphics2D.drawImage(player.getImage(), player.getX(), player.getY(), this);
+		graphics2D.drawImage(player01.getImage(), player01.getX(), player01.getY(), this);
 		
-		graphics2D.drawImage(enemy.getImage(), enemy.getX(), enemy.getY(), this);
+		graphics2D.drawImage(player02.getImage(), player02.getX(), player02.getY(), this);
 		
 		graphics.dispose();
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		player.update();
-		enemy.update();
-		if(player.isAttack()) {
+		player01.update();
+		player02.update();
+		if(player01.isAttack()) {
 			timer.setDelay(1);
 		}
 		
-		if(!player.isAttack()) {
+		if(!player01.isAttack()) {
 			timer.setDelay(5);
 		}
 		
-		if(enemy.isAttack()) {
+		if(player02.isAttack()) {
 			timer.setDelay(1);
 		}
 		
-		if(!enemy.isAttack()) {
+		if(!player02.isAttack()) {
 			timer.setDelay(5);
 		}
 		repaint();
@@ -78,22 +78,22 @@ public class Fase extends JPanel implements ActionListener {
 	private class TecladoPlayerAdapter extends KeyAdapter {
 		            
 		public void keyPressed(KeyEvent key) {
-			player.KeyPressed(key);
+			player01.KeyPressed(key);
 		}
 		
 		public void keyReleased(KeyEvent key) {
-			player.KeyRelease(key);
+			player01.KeyRelease(key);
 		}
 	}
 	
 	private class TecladoEnemyAdapter extends KeyAdapter {
 		
 		public void keyPressed(KeyEvent key) {
-			enemy.KeyPressed(key);
+			player02.KeyPressed(key);
 		}
 		
 		public void keyReleased(KeyEvent key) {
-			enemy.keyRelease(key);
+			player02.keyRelease(key);
 		}
 	}
 }

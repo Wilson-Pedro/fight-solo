@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
-public class Enemy implements ActionListener {
+public class Player01 implements ActionListener {
 
 	private Image image;
 	private int height, width;
@@ -17,9 +17,9 @@ public class Enemy implements ActionListener {
 	private Timer timer;
 	private boolean isAttack;
 	
-	public Enemy() {
-		this.x = 1000;
-		this.y = 280;
+	public Player01() {
+		this.x = 100;
+		this.y = 305;
 		
 		this.timer = new Timer(700, this);
 		this.timer.start();
@@ -27,7 +27,7 @@ public class Enemy implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(isAttack) {
+		if(isAttack == true) {
 			attack();
 			isAttack = false;
 		}
@@ -36,13 +36,13 @@ public class Enemy implements ActionListener {
 			load();
 		}
 	}
-	
+
 	public void load() {
-		ImageIcon imageIcon = new ImageIcon("res\\Enemy.png");
+		ImageIcon imageIcon = new ImageIcon("res\\Player01.png");
 		this.image = imageIcon.getImage();
 		
-		this.width = image.getWidth(null);
 		this.height = image.getHeight(null);
+		this.width = image.getWidth(null);
 	}
 	
 	public void update() {
@@ -53,40 +53,36 @@ public class Enemy implements ActionListener {
 	
 	public void attack() {
 		this.isAttack = true;
-		ImageIcon imageAttack = new ImageIcon("res\\Enemy-Attack.png");
+		ImageIcon imageAttack = new ImageIcon("res\\Player01-Attack.png");
 		this.image = imageAttack.getImage();
 	}
 	
 	public void KeyPressed(KeyEvent key) {
 		int code = key.getKeyCode();
 		
-		if(code == KeyEvent.VK_ENTER) {
+		if(code == KeyEvent.VK_SPACE) {
 			attack();
 		}
 		
-		if(code == KeyEvent.VK_LEFT) {
-			dx = -3;
+		if(code == KeyEvent.VK_D) {
+			dx = 3;
 		}
 		
-		if(code == KeyEvent.VK_RIGHT) {
-			dx = 3;
+		if(code == KeyEvent.VK_A) {
+			dx = -3;
 		}
 	}
 	
-	public void keyRelease(KeyEvent tecla) {
-		int codigo = tecla.getKeyCode();
+	public void KeyRelease(KeyEvent key) {
+		int code = key.getKeyCode();
 		
-		if(codigo == KeyEvent.VK_LEFT) {
+		if(code == KeyEvent.VK_D) {
 			dx = 0;
 		}
 		
-		if(codigo == KeyEvent.VK_RIGHT) {
+		if(code == KeyEvent.VK_A) {
 			dx = 0;
 		}
-	}
-
-	public Image getImage() {
-		return image;
 	}
 
 	public int getX() {
@@ -95,6 +91,10 @@ public class Enemy implements ActionListener {
 
 	public int getY() {
 		return y;
+	}
+
+	public Image getImage() {
+		return image;
 	}
 
 	public boolean isAttack() {
