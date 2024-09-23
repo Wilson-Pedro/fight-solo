@@ -1,6 +1,7 @@
 package fightsolo.model;
 
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -16,10 +17,13 @@ public class Player02 implements ActionListener {
 	private int dx;
 	private Timer timer;
 	private boolean isAttack;
+	private boolean isVisible;
 	
 	public Player02() {
 		this.x = 1000;
 		this.y = 280;
+		
+		this.isVisible = true;
 		
 		this.timer = new Timer(700, this);
 		this.timer.start();
@@ -51,10 +55,26 @@ public class Player02 implements ActionListener {
 		}
 	}
 	
+	public int getHeight() {
+		return height;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
 	public void attack() {
 		this.isAttack = true;
 		ImageIcon imageAttack = new ImageIcon("res\\Enemy-Attack.png");
 		this.image = imageAttack.getImage();
+	}
+	
+	public Rectangle getPlayerAttackForm() {
+		return new Rectangle(x, y, 396, 467);
+	}
+	
+	public Rectangle getPlayerForm() {
+		return new Rectangle(x, y, width, height);
 	}
 	
 	public void KeyPressed(KeyEvent key) {
@@ -99,5 +119,13 @@ public class Player02 implements ActionListener {
 
 	public boolean isAttack() {
 		return isAttack;
+	}
+	
+	public boolean isVisible() {
+		return isVisible;
+	}
+
+	public void setVisible(boolean isVisible) {
+		this.isVisible = isVisible;
 	}
 }
