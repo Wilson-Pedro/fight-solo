@@ -18,12 +18,14 @@ public class Player01 implements ActionListener {
 	private Timer timer;
 	private boolean isAttack;
 	private boolean isVisible;
+	private int life;
 	
 	public Player01() {
 		this.x = 100;
 		this.y = 305;
 		
 		this.isVisible = true;
+		this.life = 1000;
 		
 		this.timer = new Timer(700, this);
 		this.timer.start();
@@ -96,6 +98,10 @@ public class Player01 implements ActionListener {
 			dx = 0;
 		}
 	}
+	
+	public void decrementLife() {
+		this.life -= 10;
+	}
 
 	public int getX() {
 		return x;
@@ -127,5 +133,9 @@ public class Player01 implements ActionListener {
 
 	public void setVisible(boolean isVisible) {
 		this.isVisible = isVisible;
+	}
+
+	public int getLife() {
+		return life;
 	}
 }

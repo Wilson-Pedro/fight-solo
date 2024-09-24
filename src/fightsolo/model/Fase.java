@@ -92,13 +92,20 @@ public class Fase extends JPanel implements ActionListener {
 		Rectangle formAttack02 = player02.getPlayerAttackForm();
 		
 		if(formAttack01.intersects(formPlayer02) && player01.isAttack()) {
-			player02.setVisible(false);
-			player02InGame = false;
+			player02.decrementLife();
+			if(player02.getLife() <= 0) {
+				player02.setVisible(false);
+				player02InGame = false;
+			}
+
 		}
 		
 		if(formAttack02.intersects(formPlayer01) && player02.isAttack()) {
-			player01.setVisible(false);
-			player01InGame = false;
+			player01.decrementLife();
+			if(player01.getLife() <= 0) {
+				player01.setVisible(false);
+				player01InGame = false;
+			}
 		}
 		
 	}
