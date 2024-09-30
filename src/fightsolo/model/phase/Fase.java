@@ -15,7 +15,6 @@ import javax.swing.Timer;
 
 import fightsolo.model.player.Player01;
 import fightsolo.model.player.Player02;
-import fightsolo.model.soundEffects.SoundEffect;
 
 public class Fase extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -24,8 +23,6 @@ public class Fase extends JPanel implements ActionListener {
 	private Player01 player01;
 	private Player02 player02;
 	private Timer timer;
-	private boolean player01InGame;
-	private boolean player02InGame;
 	
 	public Fase() {
 		setFocusable(true);
@@ -45,9 +42,6 @@ public class Fase extends JPanel implements ActionListener {
 		
 		this.timer = new Timer(0, this);
 		this.timer.start();
-		
-		player01InGame = true;
-		player02InGame = true;
 	}
 	
 	public void paint(Graphics graphics) {
@@ -55,11 +49,11 @@ public class Fase extends JPanel implements ActionListener {
 		
 		graphics2D.drawImage(background, 0, 0, null);
 		
-		if(player01InGame) {
+		if(player01.isInGame()) {
 			graphics2D.drawImage(player01.getImage(), player01.getX(), player01.getY(), this);
 		}
 		
-		if(player02InGame) {
+		if(player02.isInGame()) {
 			graphics2D.drawImage(player02.getImage(), player02.getX(), player02.getY(), this);
 		}
 		
@@ -99,7 +93,7 @@ public class Fase extends JPanel implements ActionListener {
 			player02.decrementLife();
 			if(player02.getLife() <= 0) {
 				player02.setVisible(false);
-				player02InGame = false;
+				player02.setInGame(false);
 			}
 
 		}
@@ -108,7 +102,7 @@ public class Fase extends JPanel implements ActionListener {
 			player01.decrementLife();
 			if(player01.getLife() <= 0) {
 				player01.setVisible(false);
-				player01InGame = false;
+				player01.setInGame(false);
 			}
 		}
 		

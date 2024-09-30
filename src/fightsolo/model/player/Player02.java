@@ -20,6 +20,7 @@ public class Player02 implements ActionListener {
 	private Timer timer;
 	private boolean isAttack;
 	private boolean isVisible;
+	private boolean inGame;
 	private int life;
 	private SoundEffect soundEffect;
 	
@@ -34,6 +35,8 @@ public class Player02 implements ActionListener {
 		
 		this.timer = new Timer(700, this);
 		this.timer.start();
+		
+		inGame = true;
 	}
 	
 	@Override
@@ -88,15 +91,15 @@ public class Player02 implements ActionListener {
 	public void KeyPressed(KeyEvent key) {
 		int code = key.getKeyCode();
 		
-		if(code == KeyEvent.VK_ENTER) {
+		if(inGame == true && code == KeyEvent.VK_ENTER) {
 			attack();
 		}
 		
-		if(code == KeyEvent.VK_LEFT) {
+		if(inGame == true && code == KeyEvent.VK_LEFT) {
 			dx = -3;
 		}
 		
-		if(code == KeyEvent.VK_RIGHT) {
+		if(inGame == true && code == KeyEvent.VK_RIGHT) {
 			dx = 3;
 		}
 	}
@@ -104,11 +107,11 @@ public class Player02 implements ActionListener {
 	public void keyRelease(KeyEvent tecla) {
 		int codigo = tecla.getKeyCode();
 		
-		if(codigo == KeyEvent.VK_LEFT) {
+		if(inGame == true && codigo == KeyEvent.VK_LEFT) {
 			dx = 0;
 		}
 		
-		if(codigo == KeyEvent.VK_RIGHT) {
+		if(inGame == true && codigo == KeyEvent.VK_RIGHT) {
 			dx = 0;
 		}
 	}
@@ -143,5 +146,13 @@ public class Player02 implements ActionListener {
 	
 	public int getLife() {
 		return life;
+	}
+
+	public boolean isInGame() {
+		return inGame;
+	}
+
+	public void setInGame(boolean inGame) {
+		this.inGame = inGame;
 	}
 }

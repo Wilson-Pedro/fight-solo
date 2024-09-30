@@ -20,6 +20,7 @@ public class Player01 implements ActionListener {
 	private Timer timer;
 	private boolean isAttack;
 	private boolean isVisible;
+	private boolean inGame;
 	private int life;
 	private SoundEffect soundEffect;
 	
@@ -34,6 +35,8 @@ public class Player01 implements ActionListener {
 		
 		this.timer = new Timer(700, this);
 		this.timer.start();
+		
+		inGame = true;
 	}
 	
 	@Override
@@ -80,15 +83,15 @@ public class Player01 implements ActionListener {
 	public void KeyPressed(KeyEvent key) {
 		int code = key.getKeyCode();
 		
-		if(code == KeyEvent.VK_SPACE) {
+		if(inGame == true && code == KeyEvent.VK_SPACE) {
 			attack();
 		}
 		
-		if(code == KeyEvent.VK_D) {
+		if(inGame == true && code == KeyEvent.VK_D) {
 			dx = 3;
 		}
 		
-		if(code == KeyEvent.VK_A) {
+		if(inGame == true && code == KeyEvent.VK_A) {
 			dx = -3;
 		}
 	}
@@ -96,11 +99,11 @@ public class Player01 implements ActionListener {
 	public void KeyRelease(KeyEvent key) {
 		int code = key.getKeyCode();
 		
-		if(code == KeyEvent.VK_D) {
+		if(inGame == true && code == KeyEvent.VK_D) {
 			dx = 0;
 		}
 		
-		if(code == KeyEvent.VK_A) {
+		if(inGame == true && code == KeyEvent.VK_A) {
 			dx = 0;
 		}
 	}
@@ -143,5 +146,13 @@ public class Player01 implements ActionListener {
 
 	public int getLife() {
 		return life;
+	}
+
+	public boolean isInGame() {
+		return inGame;
+	}
+
+	public void setInGame(boolean inGame) {
+		this.inGame = inGame;
 	}
 }
