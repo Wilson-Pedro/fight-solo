@@ -2,7 +2,7 @@ package fightsolo;
 
 import javax.swing.JFrame;
 
-import fightsolo.model.Fase;
+import fightsolo.model.phase.Fase;
 
 public class Container extends JFrame {
 	private static final long serialVersionUID = 1L;
