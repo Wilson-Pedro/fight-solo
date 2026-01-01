@@ -46,6 +46,7 @@ public class Fase extends JPanel implements ActionListener {
 	
 	public void paint(Graphics graphics) {
 		Graphics2D graphics2D = (Graphics2D) graphics;
+		ImageIcon gameOverImage = new ImageIcon("res\\Game_Over_2-2.png");
 		
 		graphics2D.drawImage(background, 0, 0, null);
 		
@@ -55,6 +56,16 @@ public class Fase extends JPanel implements ActionListener {
 		
 		if(player02.isInGame()) {
 			graphics2D.drawImage(player02.getImage(), player02.getX(), player02.getY(), this);
+		}
+		
+		if(!player02.isInGame()) {
+			graphics2D.drawImage(gameOverImage.getImage(), 0, 0, null);
+			setPlayersVisable(false);
+		}
+		
+		if(!player01.isInGame()) {
+			graphics2D.drawImage(gameOverImage.getImage(), 0, 0, null);
+			setPlayersVisable(false);
 		}
 		
 		graphics.dispose();
@@ -128,5 +139,12 @@ public class Fase extends JPanel implements ActionListener {
 		public void keyReleased(KeyEvent key) {
 			player02.keyRelease(key);
 		}
+	}
+	
+	private void setPlayersVisable(boolean display) {
+		player01.setVisible(display);
+		player01.setInGame(display);
+		player02.setVisible(display);
+		player02.setInGame(display);
 	}
 }
