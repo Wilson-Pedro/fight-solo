@@ -32,4 +32,8 @@ public class SoundEffect {
 	public void playAttackSound() {
 		play(PATH + "sound-attack.wav");
 	}
+	
+	public void playDamageSound() {
+		play(PATH + "sound-damage.wav");
+	}
 }

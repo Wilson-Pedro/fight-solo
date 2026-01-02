@@ -117,6 +117,7 @@ public class Player02 implements ActionListener {
 	}
 	
 	public void decrementLife() {
+		soundEffect.playDamageSound();
 		this.life -= 10;
 	}
 
